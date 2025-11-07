@@ -1,0 +1,18 @@
+{
+    "name": "bar",
+    "layer": "top",
+    "position": "left",
+
+    "include": ["$HOME/.config/waybar/modules.json"],
+
+    "modules-left": ["clock", "tray"],
+    "modules-center": ["niri/workspaces", "hyprland/workspaces"],
+    "modules-right": ["network", "pulseaudio", "battery"],
+
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": [
+            "disk"
+        ]
+    },
+}

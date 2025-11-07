@@ -1,0 +1,89 @@
+{
+    "niri/workspaces": {
+        "all-outputs": false,
+        "disable-click": true,
+        "format": "{icon}",
+        "format-icons": {
+          "scratchpad": "",
+          "default": "",
+          "active": "",
+        },
+    },
+    "hyprland/workspaces": {
+        "active-only": false,
+    	  "format": "{icon}",
+    	  "format-icons": {
+    	      "1": "一",
+    	  	  "2": "二",
+    	  	  "3": "三",
+    	  	  "4": "四",
+    	  	  "5": "五",
+    	  	  "6": "六",
+    	  	  "7": "七",
+    	  	  "8": "八",
+    	  	  "9": "九",
+    	  	  "10": "十"
+    	  }
+    },
+    "tray": {
+      "icon-size": 20
+    },
+    "clock": {
+        "format": "{:%H\n%M}",
+        "tooltip": false,
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        //"tooltip-format": "{:%a, %d. %b %Y}"
+    },
+
+    "pulseaudio": {
+        "rotate": 90,
+        "format": " <span foreground=\"#FFF\">{volume}</span> <span foreground=\"#f6c177\">{icon}</span>  ",
+        "format-bluetooth": "{volume} <span foreground=\"#9ccfd8\"></span>  ",
+        "format-muted": " <span foreground=\"#eb6f92\">{volume} </span>  ",
+        "format-icons": {
+            "headphone": "",
+            "default": [
+                "",
+                ""
+            ]
+        },
+        "scroll-step": 1,
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "ignored-sinks": [
+            "Easy Effects Sink"
+        ]
+    },
+
+    "network": {
+      "rotate": 90,
+    	"interface": "wlp1s0",
+    	"format": " {ifname} ",
+    	"format-wifi": "<span foreground=\"#f6c177\"></span> ",
+    	"format-ethernet": " {ifname}   ",
+    	"format-disconnected": "", //An empty format will hide the module.
+    	"format-disconnected": "   ",
+    	//"tooltip-format": "{ifname}",
+    	"tooltip-format": " ",
+    	//"tooltip-format-wifi": "{essid} ({signalStrength}%) <span foreground=\"#f6c177\"></span>",
+    	"tooltip-format-wifi": "<span foreground=\"#fff\">{essid}</span> ({signalStrength}%)",
+    	"tooltip-format-ethernet": " {ifname}  ",
+    	"tooltip-format-disconnected": " Disconnected ",
+    	"max-length": 50,
+    },
+
+    "battery": {
+      "rotate": 90,
+      "states": {
+          // "good": 95,
+          "warning": 30,
+          "critical": 15
+      },
+      "format": "<span foreground=\"#fff\">{capacity}</span> <span foreground=\"#f6c177\">{icon}</span>",
+      "format-charging": "<span foreground=\"#f6c177\">{capacity}</span> <span foreground=\"#f6c177\"></span>",
+      "format-plugged": "<span foreground=\"#fff\">{capacity}</span> <span foreground=\"#f6c177\"></span>",
+      // "format-good": "", // An empty format will hide the module
+      // "format-full": "",
+      "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰁿", "󰂁", "󰂂", "󰁹"],
+    },
+}
+

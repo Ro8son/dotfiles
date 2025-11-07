@@ -1,0 +1,316 @@
+environment {
+  DISPLAY ":0"
+  XDG_SESSION_TYPE "wayland"
+  XDG_CURRENT_DESKTOP "GNOME"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+}
+
+cursor {
+  xcursor-theme "miku-cursor-linux"
+  xcursor-size 20
+  hide-when-typing
+  hide-after-inactive-ms 7000
+}
+
+input {
+  keyboard {
+    xkb {
+      layout "pl"
+      options "caps:escape"
+    }
+    repeat-delay 300
+    repeat-rate 76
+  }
+
+  touchpad {
+    tap
+    dwt
+    natural-scroll
+    accel-profile "flat"
+    scroll-method "two-finger"
+    //disabled-on-external-mouse
+  }
+
+  mouse {
+    accel-profile "flat"
+  }
+
+  //warp-mouse-to-focus
+  workspace-auto-back-and-forth
+}
+
+output "eDP-1" {
+  mode "1920x1080@60"
+  scale 1
+  transform "normal"
+  position x=0 y=0
+}
+
+output "DP-1" {
+  mode "3840x2160@60"
+  scale 1
+}
+
+output "HDMI-A-1" {
+  mode "1920x1080@60"
+  scale 1
+}
+
+// switch-events {
+//   lid-close { spawn "bash" "-c" "niri msg output \"eDP-1\" off"; }
+//   lid-open { spawn "bash" "-c" "niri msg output \"eDP-1\" on"; }
+// }
+
+layout {
+  gaps 10
+
+  center-focused-column "never"
+
+  preset-column-widths {
+    proportion 0.25
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+  }
+
+  preset-window-heights {
+    proportion 0.25
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+    proportion 1.0
+  }
+
+  default-column-width { proportion 0.5; }
+
+  focus-ring {
+    off
+    width 3
+
+    active-color "#f7c177"
+    inactive-color "#191724"
+  }
+
+  border {
+    width 3
+    active-color "#f7c177"
+    inactive-color "#191724"
+  }
+
+  struts {
+    left 16
+    right 32
+  }
+}
+
+spawn-at-startup "swaybg" "--image" "/home/robson/.config/wallpaper.png" "--mode" "fill"
+spawn-at-startup "swaync"
+spawn-at-startup "waybar"
+spawn-at-startup "foot" "--server"
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "swayidle" "-w" "timeout" "1800" "'hyprlock'" "before-sleep" "'hyprlock'"
+spawn-at-startup "systemctl" "--user" "import-environment" "DISPLAY" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "dbus-daemon" "--nofork" "--address" "unix:path=$XDG_RUNTIME_DIR/bus" "--session"
+spawn-at-startup "dbus-update-activation-environment" "DISPLAY" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP=GNOME"
+
+screenshot-path "~/pictures/screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+prefer-no-csd
+
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+}
+
+window-rule {
+  match is-window-cast-target=true
+
+  focus-ring {
+    active-color "#eb6f92"
+    inactive-color "#7d0d2d"
+  }
+
+  border {
+    inactive-color "#7d0d2d"
+  }
+
+  shadow {
+    color "#7d0d2d70"
+  }
+
+  tab-indicator {
+    active-color "#eb6f92"
+    inactive-color "#7d0d2d"
+  }
+}
+
+//window-rule {
+//    match is-floating=true
+//
+//    baba-is-float true
+//}
+
+//window-rule {
+//    match app-id="firefox"
+//
+//    block-out-from "screencast"
+//}
+
+window-rule {
+  match app-id="vesktop"
+  match app-id="steam"
+  match app-id="Xdg-desktop-portal-gtk"
+  //match app-id="Signal"
+
+  open-maximized true
+}
+
+window-rule {
+  match app-id="Xdg-desktop-portal-gtk"
+  open-floating true
+}
+
+overview {
+  backdrop-color "#1a1a1a"
+}
+
+gestures {
+    hot-corners {
+      off
+    }
+}
+
+
+binds {
+  // Mod-Shift-/, which is usually the same as Mod-?,
+  // shows a list of important hotkeys.
+  Mod+Shift+Slash { show-hotkey-overlay; }
+  Mod+Ctrl+Space { toggle-keyboard-shortcuts-inhibit; }
+
+  Mod+Return repeat=false   { spawn "footclient"; }
+  Mod+P repeat=false        { spawn "wdisplays"; }
+  Mod+Shift+O repeat=false  { spawn "swaync-client" "-t" "-sw"; }
+  Mod+D			   	        { spawn "fuzzel"; }
+  Mod+Shift+D			    { spawn "~/.local/bin/links.sh"; }
+  Mod+C                     { spawn "~/.local/bin/plumber-wayland.sh"; }
+  Mod+Shift+W               { spawn "thunar"; }
+  Ctrl+Alt+L                { spawn "hyprlock"; }
+
+  Mod+W                     { toggle-column-tabbed-display; }
+
+  XF86AudioRaiseVolume  allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+  XF86AudioLowerVolume  allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+  XF86AudioMute         allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+  XF86AudioMicMute      allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+  XF86MonBrightnessUp   allow-when-locked=true { spawn "doas" "brightnessctl" "set" "5%+"; }
+  XF86MonBrightnessDown allow-when-locked=true { spawn "doas" "brightnessctl" "set" "5%-"; }
+
+  Mod+O { toggle-overview; }
+  Mod+Q { close-window; }
+
+  Mod+H     { focus-column-left; }
+  Mod+J     { focus-window-or-workspace-down; }
+  Mod+K     { focus-window-or-workspace-up; }
+  Mod+L     { focus-column-right; }
+
+  Mod+Shift+H     { move-column-left; }
+  Mod+Shift+J     { move-window-down-or-to-workspace-down; }
+  Mod+Shift+K     { move-window-up-or-to-workspace-up; }
+  Mod+Shift+L     { move-column-right; }
+
+  Mod+Home { focus-column-first; }
+  Mod+End  { focus-column-last; }
+  Mod+Shift+Home { move-column-to-first; }
+  Mod+Shift+End  { move-column-to-last; }
+
+  Mod+Ctrl+H     { focus-monitor-left; }
+  Mod+Ctrl+J     { focus-monitor-down; }
+  Mod+Ctrl+K     { focus-monitor-up; }
+  Mod+Ctrl+L     { focus-monitor-right; }
+
+  Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+  Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+  Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+  Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+
+  Mod+u     { focus-workspace-down; }
+  Mod+i     { focus-workspace-up; }
+
+  Mod+Tab         { focus-workspace-down; }
+  Mod+Shift+Tab   { focus-workspace-up; }
+  Alt+Tab         { move-column-to-workspace-down; }
+  Alt+Shift+Tab   { move-column-to-workspace-up; }
+
+  Mod+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
+  Mod+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
+
+  Mod+1 { focus-workspace 1; }
+  Mod+2 { focus-workspace 2; }
+  Mod+3 { focus-workspace 3; }
+  Mod+4 { focus-workspace 4; }
+  Mod+5 { focus-workspace 5; }
+  Mod+6 { focus-workspace 6; }
+  Mod+7 { focus-workspace 7; }
+  Mod+8 { focus-workspace 8; }
+  Mod+9 { focus-workspace 9; }
+  Mod+0 { focus-workspace 10; }
+  Mod+Shift+1 { move-column-to-workspace 1; }
+  Mod+Shift+2 { move-column-to-workspace 2; }
+  Mod+Shift+3 { move-column-to-workspace 3; }
+  Mod+Shift+4 { move-column-to-workspace 4; }
+  Mod+Shift+5 { move-column-to-workspace 5; }
+  Mod+Shift+6 { move-column-to-workspace 6; }
+  Mod+Shift+7 { move-column-to-workspace 7; }
+  Mod+Shift+8 { move-column-to-workspace 8; }
+  Mod+Shift+9 { move-column-to-workspace 9; }
+  Mod+Shift+0 { move-column-to-workspace 10; }
+
+  Mod+Shift+Comma   { consume-window-into-column; }
+  Mod+Shift+Period  { expel-window-from-column; }
+  Mod+Comma         { consume-or-expel-window-left; }
+  Mod+Period        { consume-or-expel-window-right; }
+
+  Mod+R             { switch-preset-column-width; }
+  Mod+Shift+R       { switch-preset-window-height; }
+  Mod+Ctrl+R        { reset-window-height; }
+  Mod+F             { maximize-column; }
+  Mod+Shift+F       { fullscreen-window; }
+  Mod+Ctrl+Shift+F  { toggle-windowed-fullscreen; }
+  Mod+V             { center-column; }
+
+  Mod+Minus       { set-column-width "-10%"; }
+  Mod+Equal       { set-column-width "+10%"; }
+  Mod+Shift+Minus { set-window-height "-10%"; }
+  Mod+Shift+Equal { set-window-height "+10%"; }
+
+  // Actions to switch layouts.
+  // Note: if you uncomment these, make sure you do NOT have
+  // a matching layout switch hotkey configured in xkb options above.
+  // Having both at once on the same hotkey will break the switching,
+  // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
+  Mod+Space       { switch-focus-between-floating-and-tiling; }
+  Mod+Shift+Space { toggle-window-floating; }
+
+  Print       { screenshot; }
+  Ctrl+Print  { screenshot-screen; }
+  Alt+Print   { screenshot-window; }
+
+  Mod+Shift+E { quit; }
+
+  // Powers off the monitors. To turn them back on, do any input like
+  // moving the mouse or pressing any other key.
+  Mod+Shift+P { power-off-monitors; }
+
+  Mod+T       { set-dynamic-cast-window; }
+  Mod+Shift+T { set-dynamic-cast-monitor; }
+  Mod+Y       { clear-dynamic-cast-target; }
+}
+
+clipboard {
+    disable-primary
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+

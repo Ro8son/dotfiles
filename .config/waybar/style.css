@@ -1,0 +1,98 @@
+* {
+  all: initial;
+  font-family: 'FiraCode Nerd Font', sans-serif;
+  font-size: 18px;
+  min-width: 16px;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+
+window#waybar {
+  background: rgba(35, 33, 54, 0.8);
+  color: #D3C6AA;
+}
+
+#tray {
+  /*background-color: rgba(0, 0, 0, 1.0);*/
+  color: #f6c177;
+  padding: 0px 7px;
+  padding: 10px 0px 14px 0px;
+  margin: 6px 8px;
+}
+
+tooltip {
+    background: rgba(35, 33, 54, 0.8);
+}
+
+tooltip * {
+    color: #fff;
+    font-weight: bold;
+}
+
+#custom-vpn, #network {
+  /*background-color: rgba(0, 0, 0, 0.0);*/
+  color: #f6c177;
+  padding: 0px 7px;
+  margin: 6px 8px;
+}
+
+#clock {
+  background-color: rgba(246, 193, 119, 1.0);
+  color: #232136;
+  padding: 10px 0px 10px 0px;
+  font-weight: bold;
+}
+
+#pulseaudio {
+  /*background-color: rgba(0, 0, 0, 0.0);*/
+  color: #f6c177;
+  padding: 0px 0px 10px 0px;
+  font-weight: bold;
+}
+
+/* Text properties must be applied to button labels when GTK theme is ignored */
+#workspaces {
+  margin: 4px 4px 0px 0px;
+}
+
+#workspaces button {
+  padding: 0px 11px;
+  margin: 3px;
+}
+
+#workspaces button.focused label {
+  color: #D3C6AA;
+}
+
+#workspaces button.active label {
+  color: #f6c177;
+}
+
+#workspaces button.empty label {
+  color: #6e6a86;
+}
+
+#battery {
+  /*background-color: rgba(0, 0, 0, 0.0);*/
+  color: #f6c177;
+  padding: 0px 0px 16px 0px;
+  font-weight: bold;
+}
+
+#battery.charging, #battery.plugged {
+  /*background-color: rgba(0, 0, 0, 0.0);*/
+  color: #f6c177;
+  padding: 0px 0px 16px 0px;
+  font-weight: bold;
+}
+
+#battery.critical:not(.charging) {
+  /*background-color: rgba(0, 0, 0, 0.0);*/
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
