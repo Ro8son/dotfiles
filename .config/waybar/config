@@ -1,0 +1,31 @@
+{
+    "name": "bar2",
+    "layer": "top",
+    "height": 38,
+    "margin-top": 0,
+    "margin-bottom": 0,
+
+    "include": ["$HOME/.config/waybar/modules.json"],
+
+    "modules-left": ["niri/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["mpd", "custom/cmus", "group/hardware", "battery"],
+
+    // "tray", 
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": [
+            "pulseaudio",
+            "network",
+            "disk",
+        ]
+    },
+  "tray": {
+    "icon-size": 20
+  },
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal"
+  },
+}

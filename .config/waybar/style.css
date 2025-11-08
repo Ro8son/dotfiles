@@ -1,0 +1,111 @@
+* {
+    all: initial;
+    font-family: 'FiraCode Nerd Font', sans-serif;
+    font-size: 18px;
+    min-height: 20px;
+    border-radius: 0;
+}
+
+window#waybar {
+    background: rgba(0, 0, 0, 0.0);
+    color: #D3C6AA;
+}
+
+#workspaces {
+    background-color: #272E33;
+    padding-left: 2rem;
+}
+
+#workspaces label {
+    color: #F2EFDF;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+#workspaces button label {
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+}
+
+#workspaces button.focused label {
+    background-color: #A7C080;
+    color: #1E2326;
+}
+
+#workspace button.urgent label {
+    background-color: #E67E80;
+}
+
+#clock {
+    background-color: #A7C080;
+    color: #1E2326;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+#mpd {
+    background-color: #272E33;
+    color: #F2EFDF;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-right: 0.8rem;
+}
+
+#hardware {
+    background-color: #272E33;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-right: 0.8rem;
+}
+
+#disk,
+#network,
+#pulseaudio {
+    color: #F2EFDF;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+}
+
+#tray {
+    background-color: rgba(0, 0, 0, 0.0);
+    color: #f6c177;
+    padding: 0px 7px;
+    margin: 6px 8px;
+    /*border-bottom: 2px solid;*/
+}
+
+#battery {
+    background-color: #272E33;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+}
+
+#battery.charging, #battery.plugged {
+}
+
+#battery.critical:not(.charging) {
+  background-color: rgba(0, 0, 0, 0.0);
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/*
+#custom-cmus {
+  background-color: rgba(0, 0, 0, 0.0);
+  color: #f6c177;
+  padding: 0px 7px;
+  margin: 6px 8px;
+  border-bottom: 2px solid;
+}
+
+*/
+
+
+
+
